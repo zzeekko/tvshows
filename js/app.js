@@ -28,7 +28,7 @@ class Shows {
             {
                 id: 'cn001',
                 title: 'Adventure Time',
-                genre: ['comedy', 'adventure', 'fantasy', 'action', 'drama'],
+                genre: ['comedy', 'adventure', 'fantasy', 'action'],
                 yearStart: new Date('April 5, 2010'),
                 yearEnd: new Date('September 3, 2018'),
                 seasonCount: 10,
@@ -207,7 +207,7 @@ class Shows {
         <footer class="card-footer">
             <button class="btn btn-danger text-capitalize favoriteBtns" id="${obj.id}">${obj.isFavorite ? 'unfavorite' : 'favorite'}
             </button>
-            <span id="favorite">${obj.isFavorite ? '❤️' : '🚮'}</span>
+            <span class="emojis" id="favorite" data-span="${obj.id}">${obj.isFavorite ? '❤️' : '🚮'}</span>
         </footer>
         `
 
@@ -217,22 +217,44 @@ class Shows {
 
     // loadCards
     loadCards(arr) {
+        this.row.innerHTML = ''
         arr.forEach(item => this.buildCard(item))
     }
 
-    toggleFavorite(el) {
+    toggleFavorite(el,) {
         console.log(el.id);
         
         /**
          * loop through array
          * if id of button === id of object in array, isFavorite = !isFavorite
          */
+        const emojis = document.querySelectorAll('.emojis')
         for (let item of arr) {
             if (el.id == item.id) {
                 item.isFavorite = !item.isFavorite
-                console.log(item.isFavorite)
+                el.innerText = item.isFavorite ? 'unfavorite' : 'favorite'
+                
+                emojis.forEach(emoji => {
+                    if (emoji.getAttribute('data-span') == el.id) {
+                        emoji.innerText = item.isFavorite ? '🐐' : '🚮'
+                    }
+                })
             }
         }
+    }
+
+    filter(el) {
+        const filter = el.getAttribute('data-sort')
+        
+        let copy
+        if (filter == 'genre') {
+            const genre = document.getElementById('genreSelect').value
+            copy = this.data.filter(item => item.genre.includes(genre))
+        } else {
+            const network = document.getElementById('networkSelect').value
+            copy = this.data.filter(item => item.network == network)
+        }
+        this.loadCards(copy)
     }
 }
 
@@ -246,4 +268,18 @@ buttons.forEach(button => {
     button.addEventListener('click', ()=> {
         action.toggleFavorite(button, action.data)
     })
+})
+
+const genreBtn = document.getElementById('genreBtn')
+
+genreBtn.addEventListener('click', (e)=> {
+    e.preventDefault()
+    action.filter(genreBtn)
+})
+
+const networkBtn = document.getElementById('networkBtn')
+
+networkBtn.addEventListener('click', (e)=> {
+    e.preventDefault()
+    action.filter(networkBtn)
 })

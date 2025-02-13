@@ -14,6 +14,36 @@
     </header>
     <main class="main" id="main">
         <div class="container">
+            <div class="row">
+                <div class="col-4 mb-3">
+                    <form action="#" class="form d-flex" id="genreForm">
+                        <select name="genre" id="genreSelect" class="form-select">
+                            <option selected value="">--Genre--</option>
+                            <option value="comedy">Comedy</option>
+                            <option value="fantasy">Fantasy</option>
+                            <option value="action">Action</option>
+                            <option value="adventure">Adventure</option>
+                            <option value="family">Family</option>
+                            <option value="sci-fi">Sci-Fi</option>
+                            <option value="mystery">Mystery</option>
+                            <option value="music">music</option>
+                        </select>
+                        <button class="btn btn-danger" id="genreBtn" data-sort="genre">Sort</button>
+                    </form>
+                </div>
+                <div class="col-4 mb-3 offset-4">
+                    <form action="#" class="form d-flex" id="networkForm">
+                        <select name="network" id="networkSelect" class="form-select">
+                            <option selected value="">--Genre--</option>
+                            <option value="cartoon network">Cartoon Network</option>
+                            <option value="pbs">PBS</option>
+                            <option value="nickelodeon">Nickleodeon</option>
+                            <option value="disney">Disney</option>
+                        </select>
+                        <button class="btn btn-danger" id="networkBtn" data-sort="network">Sort</button>
+                    </form>
+                </div>
+            </div>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3" id="row"></div>
         </div>
     </main>
