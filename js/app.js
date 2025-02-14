@@ -211,6 +211,7 @@ class Shows {
         </footer>
         `
 
+        
         column.appendChild(card)
         row.appendChild(column)
     }
@@ -221,7 +222,7 @@ class Shows {
         arr.forEach(item => this.buildCard(item))
     }
 
-    toggleFavorite(el,) {
+    toggleFavorite(el, arr) {
         console.log(el.id);
         
         /**
@@ -230,7 +231,7 @@ class Shows {
          */
         const emojis = document.querySelectorAll('.emojis')
         for (let item of arr) {
-            if (el.id == item.id) {
+            if (event.target.id == el.id && el.id == item.id) {
                 item.isFavorite = !item.isFavorite
                 el.innerText = item.isFavorite ? 'unfavorite' : 'favorite'
                 
